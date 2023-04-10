@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 steps:
 - task: DownloadSecureFile@1
@@ -12,7 +12,7 @@ steps:
     secureFile: 'storage.json'
 
 - script: |
-    az storage blob upload-batch --destination databricksproject --destination-path databricksproject --source ..utils/sample.json . --pattern sample.json
+    az storage blob upload-batch --destination databricksproject --destination-path databricksproject --source. --pattern utils/sample.json
   displayName: 'Upload file to storage'
   env:
     AZURE_STORAGE_CONNECTION_STRING: $(storageConnectionString)

@@ -9,7 +9,7 @@ steps:
   name: 'GetFile'
   displayName: 'Download file from secure location'
   inputs:
-    secureFile: 'file with storage credentials'
+    secureFile: 'storage.json'
 
 - script: |
     az storage blob upload-batch --destination databricksproject --destination-path databricksproject --source ..utils/sample.json . --pattern sample.json

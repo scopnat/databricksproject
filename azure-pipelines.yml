@@ -12,7 +12,7 @@ steps:
     secureFile: 'storage.json'
 
 - script: |
-    az storage blob upload-batch --destination databricksproject --destination-path databricksproject --source C:\Users\scopn\Downloads\case_study_devops_engineer\case_study_devops_engineer\src\utils --pattern sample.json
+    az storage blob upload-batch --destination databricksproject --destination-path databricksproject --source C:\Users\scopn\OneDrive\Desktop --pattern sample.json
   displayName: 'Upload file to storage'
   env:
     AZURE_STORAGE_CONNECTION_STRING: $(storageConnectionString)

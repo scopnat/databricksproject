@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: DownloadSecureFile@1
+  name: 'GetFile'
+  displayName: 'Download file from secure location'
+  inputs:
+    secureFile: 'utils/sample.json'
+
+- script: |
+    az storage blob upload-batch --destination databricksproject --destination-path databricksproject --source ..utils/sample.json . --pattern sample.json
+  displayName: 'Upload file to storage'
+  env:
+    AZURE_STORAGE_CONNECTION_STRING: $(storageConnectionString)

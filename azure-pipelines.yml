@@ -7,7 +7,7 @@ pool:
 stages:
 - stage:
   jobs:
-  -	job:
+  - job:
     steps:
     - task: CopyFiles@2
       displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'

@@ -33,7 +33,7 @@ stages:
 - stage:
   displayName: Upload to Notebooks
   dependsOn: Upload Blob to Storage Account
-  condition: succeeded("Upload Blob to Storage Account")
+  condition: succeeded()
   jobs:
   - job:
     displayName: Copy from Source Databrick

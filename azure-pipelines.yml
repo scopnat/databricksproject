@@ -6,30 +6,17 @@ pool:
 
 stages:
 - stage:
+  displayName: Upload Blob to Storage Account
   jobs:
   - job:
+    displayName: Copy from Source to Destination
     steps:
     - task: CopyFiles@2
       displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
       inputs:
         SourceFolder: utils
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
-        
-    # - task: PublishBuildArtifacts@1
-    #   displayName: 'Publish Artifact: drop'
-      
-    # - task: CopyFiles@2
-    #   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-    #   inputs:
-    #     SourceFolder: utils
-    #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-        
-    # - task: PublishBuildArtifacts@1
-    #   displayName: 'Publish Artifact: drop'
-    
-    # - script: dir $(Build.ArtifactStagingDirectory)
-
-      
+     
     - task: AzureFileCopy@3
       displayName: 'AzureBlob File Copy'
       inputs:

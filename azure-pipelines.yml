@@ -1,18 +1,57 @@
 trigger:
-- main
+- none
 
 pool:
   vmImage: 'windows-latest'
+  
+stages:
+- stage: Upload_Blob_to_Storage_Account
+  displayName: 'Upload Blob to Storage Account'
+  jobs:
+  - job:
+    displayName: Copy from Source to Destination
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        SourceFolder: utils
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+     
+    - task: AzureFileCopy@3
+      displayName: 'AzureBlob File Copy'
+      inputs:
+        SourcePath: '$(Build.ArtifactStagingDirectory)/sample.json'
+        azureSubscription: 'databricksproject'
+        Destination: 'AzureBlob'
+        storage: 'adestorage99'
+        ContainerName: 'copysample'
+        outputStorageUri: 'https://adestorage99.blob.core.windows.net/copysample'
+        outputStorageContainerSasToken: 'sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-12T18:02:24Z&st=2023-04-12T10:02:24Z&spr=https&sig=TAVhYPSd0aYow5L7LVOdfdIpTy2pzhVjs2fFvplLqvw%3D'
+        sasTokenTimeOutInMinutes: '240'
 
-steps:
-- task: DownloadSecureFile@1
-  name: 'GetFile'
-  displayName: 'Download file from secure location'
-  inputs:
-    secureFile: 'storage.json'
 
-- script: |
-    az storage blob upload-batch --destination databricksproject --destination-path databricksproject --source 'C:\Users\scopn\OneDrive\Desktop' --pattern sample.json
-  displayName: 'Upload file to storage'
-  env:
-    AZURE_STORAGE_CONNECTION_STRING: $(storageConnectionString)
+- stage: Upload_to_Notebooks
+  displayName: Upload to Notebooks
+  dependsOn: Upload_Blob_to_Storage_Account
+  condition: succeeded('Upload_Blob_to_Storage_Account')
+  jobs:
+  - job:
+    displayName: Copy from Source Databrick
+    steps:
+    - task: CopyFiles@2
+      inputs:
+       SourceFolder: 'databricks'
+       Contents: '**/*.py'
+       TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    
+    - script: dir $(Build.ArtifactStagingDirectory)
+
+    - task: configuredatabricks@0
+      inputs:
+       url: 'https://adb-6454971456462718.18.azuredatabricks.net'
+       token: 'dapibb3af2c49a66bce07bee1db2c8aa2aa3'
+
+    - task: deploynotebooks@0
+      inputs:
+        notebooksFolderPath: '$(Build.ArtifactStagingDirectory)'
+        workspaceFolder: '/Shared'

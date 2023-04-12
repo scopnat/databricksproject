@@ -26,7 +26,7 @@ stages:
         SourcePath: '$(Build.ArtifactStagingDirectory)/sample.json'
         azureSubscription: 'databricksproject'
         Destination: 'AzureBlob'
-        storage: '$(storage)'
+        storage: 'adestorage99'
         ContainerName: '$(ContainerName)'
         outputStorageUri: '$(outputStorageUri)'
         outputStorageContainerSasToken: '$(outputStorageContainerSasToken)'

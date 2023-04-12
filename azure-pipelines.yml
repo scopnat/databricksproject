@@ -1,14 +1,36 @@
 trigger:
 - none
 
-paths:
-  include:
-  -
-
 pool:
   vmImage: 'windows-latest'
   
 stages:
+- stage:
+  displayName: Upload Blob to Storage Account
+  dependsOn: Upload to Notebooks
+  jobs:
+  - job:
+    displayName: Copy from Source to Destination
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        SourceFolder: utils
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+     
+    - task: AzureFileCopy@3
+      displayName: 'AzureBlob File Copy'
+      inputs:
+        SourcePath: '$(Build.ArtifactStagingDirectory)/sample.json'
+        azureSubscription: 'databricksproject'
+        Destination: 'AzureBlob'
+        storage: 'adestorage99'
+        ContainerName: 'copysample'
+        outputStorageUri: 'https://adestorage99.blob.core.windows.net/copysample'
+        outputStorageContainerSasToken: 'sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-12T18:02:24Z&st=2023-04-12T10:02:24Z&spr=https&sig=TAVhYPSd0aYow5L7LVOdfdIpTy2pzhVjs2fFvplLqvw%3D'
+        sasTokenTimeOutInMinutes: '240'
+
+
 - stage:
   displayName: Upload to Notebooks
   jobs:
@@ -34,30 +56,3 @@ stages:
       displayName: 'Deploy Notebooks to Workspace'
       inputs:
         notebooksFolderPath: '$(Build.ArtifactStagingDirectory)/_databricksproject-CI/drop'
-
-
-
-- stage:
-  displayName: Upload Blob to Storage Account
-  dependsOn: Upload to Notebooks
-  jobs:
-  - job:
-    displayName: Copy from Source to Destination
-    steps:
-    - task: CopyFiles@2
-      displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        SourceFolder: utils
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-     
-    - task: AzureFileCopy@3
-      displayName: 'AzureBlob File Copy'
-      inputs:
-        SourcePath: '$(Build.ArtifactStagingDirectory)/sample.json'
-        azureSubscription: 'databricksproject'
-        Destination: 'AzureBlob'
-        storage: 'adestorage99'
-        ContainerName: 'copysample'
-        outputStorageUri: 'https://adestorage99.blob.core.windows.net/copysample'
-        outputStorageContainerSasToken: 'sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-12T18:02:24Z&st=2023-04-12T10:02:24Z&spr=https&sig=TAVhYPSd0aYow5L7LVOdfdIpTy2pzhVjs2fFvplLqvw%3D'
-        sasTokenTimeOutInMinutes: '240'

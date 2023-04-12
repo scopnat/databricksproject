@@ -27,7 +27,7 @@ stages:
         azureSubscription: 'databricksproject'
         Destination: 'AzureBlob'
         storage: 'adestorage99'
-        ContainerName: '$(ContainerName)'
+        ContainerName: 'copysample'
         outputStorageUri: '$(outputStorageUri)'
         outputStorageContainerSasToken: '$(outputStorageContainerSasToken)'
         sasTokenTimeOutInMinutes: '$(sasTokenTimeOutInMinutes)'

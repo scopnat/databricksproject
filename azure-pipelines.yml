@@ -53,5 +53,5 @@ stages:
 
     - task: deploynotebooks@0
       inputs:
-       notebooksFolderPath: '$(Build.ArtifactStagingDirectory)/_databricksproject-CI/drop'
-       workspaceFolder: '/Shared'
+        notebooksFolderPath: '$(Build.ArtifactStagingDirectory)/*'
+        workspaceFolder: '/Shared'

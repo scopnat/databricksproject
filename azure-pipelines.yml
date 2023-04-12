@@ -26,6 +26,9 @@ stages:
         
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
+    
+    - script: dir $(Build.ArtifactStagingDirectory)
+
       
     - task: AzureFileCopy@3
       displayName: 'AzureBlob File Copy'

@@ -31,8 +31,10 @@ stages:
       displayName: 'AzureBlob File Copy'
       inputs:
         SourcePath: '$(System.DefaultWorkingDirectory)/_databricksproject-CI/drop'
-        azureSubscription: databricksproject
-        Destination: AzureBlob
-        storage: adestorage99
-        ContainerName: copysample
-        sasTokenTimeOutInMinutes: 240
+        azureSubscription: 'databricksproject'
+        Destination: 'AzureBlob'
+        storage: 'adestorage99'
+        ContainerName: 'copysample'
+        outputStorageUri: 'https://adestorage99.blob.core.windows.net/copysample'
+        outputStorageContainerSasToken: 'sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-12T18:02:24Z&st=2023-04-12T10:02:24Z&spr=https&sig=TAVhYPSd0aYow5L7LVOdfdIpTy2pzhVjs2fFvplLqvw%3D'
+        sasTokenTimeOutInMinutes: '240'

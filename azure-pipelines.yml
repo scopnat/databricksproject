@@ -30,7 +30,7 @@ stages:
         ContainerName: 'copysample'
         outputStorageUri: '$(outputStorageUri)'
         outputStorageContainerSasToken: '$(outputStorageContainerSasToken)'
-        sasTokenTimeOutInMinutes: '$(sasTokenTimeOutInMinutes)'
+        sasTokenTimeOutInMinutes: '240'
 
 
 - stage: Upload_to_Notebooks

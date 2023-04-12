@@ -5,8 +5,8 @@ pool:
   vmImage: 'windows-latest'
   
 stages:
-- stage: Upload Blob to Storage Account
-  displayName: Upload Blob to Storage Account
+- stage: Upload_Blob_to_Storage_Account
+  displayName: 'Upload Blob to Storage Account'
   jobs:
   - job:
     displayName: Copy from Source to Destination
@@ -30,10 +30,10 @@ stages:
         sasTokenTimeOutInMinutes: '240'
 
 
-- stage: Upload to Notebooks
+- stage: Upload_to_Notebooks
   displayName: Upload to Notebooks
-  dependsOn: Upload Blob to Storage Account
-  condition: succeeded("Upload Blob to Storage Account")
+  dependsOn: Upload_Blob_to_Storage_Account
+  condition: succeeded('Upload_Blob_to_Storage_Account')
   jobs:
   - job:
     displayName: Copy from Source Databrick

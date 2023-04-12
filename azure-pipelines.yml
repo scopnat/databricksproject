@@ -1,12 +1,45 @@
 trigger:
 - none
 
+paths:
+  include:
+  -
+
 pool:
   vmImage: 'windows-latest'
-
+  
 stages:
 - stage:
+  displayName: Upload to Notebooks
+  jobs:
+  - job:
+    displayName: SBFVERFR
+    steps:
+    - task: CopyFiles@2
+	    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+	    inputs:
+        SourceFolder: databricks
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+ 
+    - task: PublishBuildArtifacts@1
+      displayName:'Publish Artifact:drop'
+
+    - task: riserrad.azdo-databricks.azdo-databricks-configuredatabricks.configuredatabricks@0
+      displayName: 'Configure Databricks CLI'
+      inputs:
+        url: 'https://adb-6454971456462718.18.azuredatabricks.net'
+        token: dapibb3af2c49a66bce07bee1db2c8aa2aa3
+
+    - task: riserrad.azdo-databricks.azdo-databricks-deploynotebooks.deploynotebooks@0
+      displayName: 'Deploy Notebooks to Workspace'
+      inputs:
+        notebooksFolderPath: '$(Build.ArtifactStagingDirectory)/_databricksproject-CI/drop'
+
+
+
+- stage:
   displayName: Upload Blob to Storage Account
+  dependsOn: Upload to Notebooks
   jobs:
   - job:
     displayName: Copy from Source to Destination

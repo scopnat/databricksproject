@@ -26,11 +26,11 @@ stages:
         SourcePath: '$(Build.ArtifactStagingDirectory)/sample.json'
         azureSubscription: 'databricksproject'
         Destination: 'AzureBlob'
-        storage: $(storage)
-        ContainerName: $(ContainerName)
-        outputStorageUri: $(outputStorageUri)
-        outputStorageContainerSasToken: $(outputStorageContainerSasToken)
-        sasTokenTimeOutInMinutes: $(sasTokenTimeOutInMinutes)
+        storage: '$(storage)'
+        ContainerName: '$(ContainerName)'
+        outputStorageUri: '$(outputStorageUri)'
+        outputStorageContainerSasToken: '$(outputStorageContainerSasToken)'
+        sasTokenTimeOutInMinutes: '$(sasTokenTimeOutInMinutes)'
 
 
 - stage: Upload_to_Notebooks
@@ -51,8 +51,8 @@ stages:
 
     - task: configuredatabricks@0
       inputs:
-       url: $(url)
-       token: $(token)
+       url: '$(url)'
+       token: '$(token)'
 
     - task: deploynotebooks@0
       inputs:

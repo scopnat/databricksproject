@@ -53,5 +53,5 @@ stages:
 
     - task: deploynotebooks@0
       inputs:
-        notebooksFolderPath: '$(Build.ArtifactStagingDirectory)/*'
+        notebooksFolderPath: '$(Build.ArtifactStagingDirectory)'
         workspaceFolder: '/Shared'

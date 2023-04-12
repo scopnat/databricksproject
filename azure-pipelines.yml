@@ -15,19 +15,19 @@ stages:
         SourceFolder: utils
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
         
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
+    # - task: PublishBuildArtifacts@1
+    #   displayName: 'Publish Artifact: drop'
       
-    - task: CopyFiles@2
-      displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        SourceFolder: utils
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    # - task: CopyFiles@2
+    #   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+    #   inputs:
+    #     SourceFolder: utils
+    #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
         
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
+    # - task: PublishBuildArtifacts@1
+    #   displayName: 'Publish Artifact: drop'
     
-    - script: dir $(Build.ArtifactStagingDirectory)
+    # - script: dir $(Build.ArtifactStagingDirectory)
 
       
     - task: AzureFileCopy@3

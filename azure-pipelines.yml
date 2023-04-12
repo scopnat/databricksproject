@@ -24,10 +24,10 @@ stages:
       displayName: 'AzureBlob File Copy'
       inputs:
         SourcePath: '$(Build.ArtifactStagingDirectory)/sample.json'
-        azureSubscription: 'databricksproject'
+        azureSubscription: '$(azureSubscription)'
         Destination: 'AzureBlob'
-        storage: 'adestorage99'
-        ContainerName: 'copysample'
+        storage: '$(storage)'
+        ContainerName: '$(ContainerName)'
         outputStorageUri: '$(outputStorageUri)'
         outputStorageContainerSasToken: '$(outputStorageContainerSasToken)'
         sasTokenTimeOutInMinutes: '240'

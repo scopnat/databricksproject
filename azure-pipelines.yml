@@ -51,7 +51,7 @@ stages:
 
     - task: configuredatabricks@0
       inputs:
-       url: 'https://adb-6454971456462718.18.azuredatabricks.net'
+       url: '$(url)'
        token: '$(token)'
 
     - task: deploynotebooks@0

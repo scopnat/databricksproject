@@ -5,7 +5,7 @@ pool:
   vmImage: 'windows-latest'
 
   variables:
-- group: databricks-var-kv
+    - group: databricks-var-kv
   
 stages:
 - stage: Upload_Blob_to_Storage_Account

@@ -24,7 +24,7 @@ stages:
       displayName: 'AzureBlob File Copy'
       inputs:
         SourcePath: '$(Build.ArtifactStagingDirectory)/sample.json'
-        azureSubscription: $(azureSubscription)
+        azureSubscription: $'(azureSubscription)'
         Destination: 'AzureBlob'
         storage: $(storage)
         ContainerName: $(ContainerName)

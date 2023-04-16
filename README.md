@@ -11,3 +11,5 @@ This project shows how you can copy a file to Azure Storage datalake and to a wo
 8. Run Pipeline
 
 # Pipeline Run
+
+![image](https://user-images.githubusercontent.com/98498191/232304892-d8c69cfb-c283-4ecb-80d6-361d10cd5aa2.png)

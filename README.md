@@ -1,20 +1,13 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This project shows how you can copy a file to Azure Storage datalake and to a workspace in Databricks.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+1. Deploy Databricks
+2. Deploy Datalake Storage
+3. Create Repo and put those files in the Repo
+4. Create a Variable Group in Pipeline->Library called: databricks-project (optional)
+5. Connect the Variable Group to the Azure Keyvault and add all the variables (optional)
+7. Create Variables on the pipeline and add variables
+8. Run Pipeline
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Pipeline Run
